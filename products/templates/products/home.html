@@ -1,0 +1,48 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+  <form method="get" class="filter_form">
+    {% for field in filter.form %}
+      <p>
+        <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+       </p> 
+        <p>{{ field }}</p>
+      
+    {% endfor %}
+    <button type="submit">Filter</button>
+  </form>
+  
+    <div class="container">
+        {% if products %}
+          {% for product in products %}
+            <!-- Card content for each product -->
+            <div class="card">
+              <img src="{% static 'images/2+placeholder.png' %}" alt="{{ product.name }}">
+              <div class="card-bottom">
+                <div class="card-left">
+                  <h5>{{ product.name }}</h5>
+                  <p>${{ product.price }}</p>
+                </div>
+                <div class="card-right">
+                  <button data-product={{ product.id }} data-action="add" class="btn">Add to Cart</button>
+                  <button class="view">View</button>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <!-- Message when no products found -->
+          <p>No products found.</p>
+        {% endif %}
+      </div>
+</body>
+</html> 
+
