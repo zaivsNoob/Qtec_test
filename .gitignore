@@ -1,5 +1,0 @@
-.env
-
-# Database files
-*.sqlite3
-*.db
